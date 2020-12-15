@@ -38,7 +38,7 @@ def train_lgb(
         dtrain = lgb.Dataset(train_x, label=train_y)
         dval = lgb.Dataset(val_x, label=val_y, reference=dtrain)
 
-        num_round = 10000
+        num_round = 30000
         param = {
             "objective": "rmse",
             "verbosity": -100,

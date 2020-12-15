@@ -545,32 +545,26 @@ def rank_by_cols(train_df: pd.DataFrame, test_df: pd.DataFrame) -> List[pd.DataF
         "Genre",
         "Platform",
         "Rating",
+        "Year_of_Release",
+        "norm_Year_of_Release",
         # combination categories
         "Platform_Genre",
+        "Platform_norm_Year_of_Release",
         "Platform_Rating",
+        "Genre_norm_Year_of_Release",
         "Genre_Rating",
-        "norm_Year_of_Release",
+        "norm_Year_of_Release_Rating",
     ]
     elem_cols = [
-        "User_Score",
         "Year_of_Release",
-        "Critic_Score",
+        "User_Score",
         "User_Count",
+        "Critic_Score",
         "User_Score",
     ]
-    # train_df["is_train"] = True
-    # test_df["is_train"] = False
-    # concat_df = pd.concat([train_df, test_df])
 
     for col in cols:
         for e_col in elem_cols:
-
-            # concat_df[f"rank_{col}_{e_col}"] = concat_df.groupby(col)[e_col].rank(
-            #     method="first"
-            # )
-            # concat_df[f"rank_pct_{col}_{e_col}"] = concat_df.groupby(col)[e_col].rank(
-            #     method="first", pct=True
-            # )
             out_train_df[f"rank_{col}_{e_col}"] = train_df.groupby(col)[e_col].rank(
                 method="first"
             )
@@ -583,10 +577,5 @@ def rank_by_cols(train_df: pd.DataFrame, test_df: pd.DataFrame) -> List[pd.DataF
             out_test_df[f"rank_pct_{col}_{e_col}"] = test_df.groupby(col)[e_col].rank(
                 method="first", pct=True
             )
-
-    # return_columns = concat_df.columns[(concat_df.columns.str.startswith("rank"))]
-
-    # out_train_df = concat_df[concat_df.is_train][return_columns]
-    # out_test_df = concat_df[~concat_df.is_train][return_columns]
 
     return [out_train_df, out_test_df]
