@@ -3,8 +3,8 @@ import preprocessing
 import config
 from train import predict_models, train_lgb
 import numpy as np
-from sklearn.preprocessing import mean_squared_log_error
-from pandas import pd
+from sklearn.metrics import mean_squared_log_error
+import pandas as pd
 
 if __name__ == "__main__":
     train_df = pd.read_csv(config.DATA_DIR.joinpath("train.csv"))
